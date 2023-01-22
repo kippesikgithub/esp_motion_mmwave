@@ -19,7 +19,6 @@ GND <-> GND
 GPIO18 <-> RX  
 GPIO33 <-> TX  
 GPIO5 <-> OUT  
-![image](https://user-images.githubusercontent.com/100353268/213941725-eea4a95a-4947-4809-a1ad-cd1aef417f04.png)
 
 
 #### Pinout ESP8266 (Wemos d1 mini) Board
