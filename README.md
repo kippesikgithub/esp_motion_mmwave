@@ -40,7 +40,7 @@ Make sure you change all he !secret values, or create them in your esphome secre
 Change at least the following (example)  
 file: esp-motion-test.yaml  
 - name (line 2)
-- name (line 157)
+- name (line 166)
 
 ## Step 4
 Add to code to a new device in esphome  
