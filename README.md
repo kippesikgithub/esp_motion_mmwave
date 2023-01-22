@@ -11,7 +11,10 @@ Choose the ESP32 or ESP8266 code for your board
 ## Pinout ESP32 (ESP32-S2)
 
 esphome code: 
+
 ESP32-S2 | LD2410
+![image](https://user-images.githubusercontent.com/100353268/213940296-db9187e2-653e-4eb4-b36b-328f2b424bdc.png)
+
 5V <-> VCC
 GND <-> GND
 GPIO18 <-> RX
@@ -22,6 +25,8 @@ GPIO5 <-> OUT
 esphome code: 
 
 ESP8266 | LD2410
+![image](https://user-images.githubusercontent.com/100353268/213940308-62fd8b25-efde-49a5-9247-694ea7481811.png)
+
 5V <-> VCC
 GND <-> GND
 TX <-> RX
