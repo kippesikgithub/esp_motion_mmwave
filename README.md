@@ -38,9 +38,9 @@ GPIO5 <-> OUT
 ### Step 3
 Make sure you change all he !secret values, or create them in your esphome secrets  
 Change at least the following (example)  
-file: esp-motion-test.yaml  
-- name (line 2)
-- name (line 166)
+file: esp-motion-kinderkamer-lucas.yaml  
+- name of the board you use
+- names of the board in esphome and the motion sensor name (around line 166)
 
 ## Step 4
 Add to code to a new device in esphome  
