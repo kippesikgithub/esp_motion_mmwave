@@ -1,7 +1,7 @@
 # LD2410 mmwave Motion detection
 LD2410 mmwave Motion detection in ESPHome for Home Assistant . Can be combined with temperature, humidity and lux sensor
 
-# Step 1
+### Step 1
 copy the code from ld2410_uart.h into a new file in the esphome directory, using for example Studio Code server
 
 ### Step 2
