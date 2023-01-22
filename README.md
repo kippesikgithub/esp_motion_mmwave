@@ -5,7 +5,7 @@ sensor: https://nl.aliexpress.com/item/1005004786874722.html?spm=a2g0o.order_lis
 3D Printed box used: https://www.thingiverse.com/thing:5631878
   
 ### Step 1
-copy the code from ld2410_uart.h into a new file in the esphome directory, using for example Studio Code server
+copy the code from uart_read_line_sensor_ld2410v3.h into a new file in the esphome directory, using for example Studio Code server
 
 ### Step 2
 Choose the ESP32 or ESP8266 code for your board  
