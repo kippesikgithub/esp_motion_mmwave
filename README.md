@@ -29,13 +29,13 @@ D7 <-> OUT
 #### Example including ESP32-S2 + DHT11 + Lux sensor  
 esphome example code: esp-motion-kinderkamer-sophie.yaml  
 
-### Step 3
+#### Step 3
 Make sure you change all he !secret values, or create them in your esphome secrets  
 Change at least the following (example)  
 file: esp-motion-kinderkamer-lucas.yaml  
 - name of the board you use
 - names of the board in esphome and the motion sensor name (around line 166)
 
-## Step 4
+#### Step 4
 Add to code to a new device in esphome  
 Once finsihed and sensor is online, you can add it in Home assistant or visit the webpage of the device.
