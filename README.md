@@ -25,15 +25,9 @@ GND <-> GND
 TX <-> RX  
 RX <-> TX  
 D7 <-> OUT  
-
-#### Pinout ESP32-S2 + DHT11 (temp, humidity) + Lux Sensor
-esphome example code: esp-motion-kinderkamer-lucas.yaml  
-ESP32-S2 | LD2410  
-5V <-> VCC  
-GND <-> GND  
-GPIO18 <-> RX  
-GPIO33 <-> TX  
-GPIO5 <-> OUT  
+  
+#### Example including ESP32-S2 + DHT11 + Lux sensor  
+esphome example code: esp-motion-kinderkamer-sophie.yaml  
 
 ### Step 3
 Make sure you change all he !secret values, or create them in your esphome secrets  
