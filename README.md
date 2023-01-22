@@ -10,10 +10,8 @@ Choose the ESP32 or ESP8266 code for your board
 
 ## Pinout ESP32 (ESP32-S2)
 
-esphome code: 
-
+esphome code: esp-motion-kinderkamer-lucas.yaml  
 ESP32-S2 | LD2410  
-
 5V <-> VCC  
 GND <-> GND  
 GPIO18 <-> RX  
@@ -21,10 +19,8 @@ GPIO33 <-> TX
 GPIO5 <-> OUT  
 
 ## Pinout ESP8266 (Wemos d1 mini) Board
-esphome code: 
-
+esphome code: esp-motion-toilet.yaml  
 ESP8266 | LD2410  
-
 5V <-> VCC  
 GND <-> GND  
 TX <-> RX  
