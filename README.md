@@ -40,7 +40,7 @@ esphome example code: esp-motion-kinderkamer-sophie.yaml
 
 
 #### Step 3
-Make sure you change all he !secret values, or create them in your esphome secrets  
+Make sure you change all the !secret values, or create them in your esphome secrets  
 Change at least the following (example)  
 file: esp-motion-kinderkamer-lucas.yaml  
 - name of the board you use
