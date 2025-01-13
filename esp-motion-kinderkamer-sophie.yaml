@@ -24,6 +24,7 @@ logger:
 api:
 
 ota:
+  platform: esphome
   password: !secret ota
 
 wifi:
@@ -89,30 +90,6 @@ text_sensor:
     update_interval: 60s
 
 sensor:
-  - platform: uptime
-    name: uptime_sensor
-    id: uptime_sensor
-    update_interval: 60s
-    internal: true
-    on_raw_value:
-      then:
-        - text_sensor.template.publish:
-            id: uptime_human_readable
-            state: !lambda |-
-                      int seconds = round(id(uptime_sensor).raw_state);
-                      int days = seconds / (24 * 3600);
-                      seconds = seconds % (24 * 3600);
-                      int hours = seconds / 3600;
-                      seconds = seconds % 3600;
-                      int minutes = seconds /  60;
-                      seconds = seconds % 60;
-                      return (
-                        (days ? to_string(days)+":" : "00:") +
-                        (hours ? to_string(hours)+":" : "00:") +
-                        (minutes ? to_string(minutes)+":" : "00:") +
-                        (to_string(seconds))
-                      ).c_str();
-
   - platform: custom # currently crashes ESP32
     lambda: |-
       auto uart_component = static_cast<LD2410 *>(ld2410);
