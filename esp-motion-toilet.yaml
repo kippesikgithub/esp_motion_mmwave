@@ -1,28 +1,36 @@
 esphome:
-  name: esp-motion-toilet
-  platform: ESP8266
-  board: d1_mini
+  name: esp-motion-toilet-beneden
   includes:
     - uart_read_line_sensor_ld2410v3.h
   on_boot:
     priority: -100
     then:
       - script.execute: get_config
+    
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
 
 # Enable logging
 logger:
+  baud_rate: 0
+  logs:
+    sensor: INFO # DEBUG level with uart_target_output = overload!
+    binary_sensor: INFO
+    text_sensor: INFO
 
 # Enable Home Assistant API
 api:
-  encryption:
-    key: "yZyVmgUff/1z+BykLXb4ZjR+H0fvox9EpL3mcGwJLDA="
 
 ota:
+  platform: esphome
   password: !secret ota
 
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
+
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
@@ -43,9 +51,9 @@ captive_portal:
 uart:
   id: uart_bus
   tx_pin:
-    number: TX
+    number: GPIO18
   rx_pin: 
-    number: RX
+    number: GPIO33
   baud_rate: 256000
   parity: NONE
   stop_bits: 1
@@ -83,30 +91,6 @@ text_sensor:
     update_interval: 60s
 
 sensor:
-  - platform: uptime
-    name: uptime_sensor
-    id: uptime_sensor
-    update_interval: 60s
-    internal: true
-    on_raw_value:
-      then:
-        - text_sensor.template.publish:
-            id: uptime_human_readable
-            state: !lambda |-
-                      int seconds = round(id(uptime_sensor).raw_state);
-                      int days = seconds / (24 * 3600);
-                      seconds = seconds % (24 * 3600);
-                      int hours = seconds / 3600;
-                      seconds = seconds % 3600;
-                      int minutes = seconds /  60;
-                      seconds = seconds % 60;
-                      return (
-                        (days ? to_string(days)+":" : "00:") +
-                        (hours ? to_string(hours)+":" : "00:") +
-                        (minutes ? to_string(minutes)+":" : "00:") +
-                        (to_string(seconds))
-                      ).c_str();
-
   - platform: custom # currently crashes ESP32
     lambda: |-
       auto uart_component = static_cast<LD2410 *>(ld2410);
@@ -157,9 +141,9 @@ custom_component:
       
 binary_sensor:
   - platform: gpio
-    name: toilet-occupancy
+    name: toilet-beneden-occupancy
     id: mmwave_presence_ld2410
-    pin: D7
+    pin: GPIO5
     device_class: motion
     on_state:
       then:
@@ -215,6 +199,7 @@ number:
     name: "motion_hold_(sec)"
     id: noneDuration
     min_value: 0
+    # max_value: 32767
     max_value: 900
     step: 1
     mode: box
