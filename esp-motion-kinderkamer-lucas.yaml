@@ -24,11 +24,13 @@ logger:
 api:
 
 ota:
+  platform: esphome
   password: !secret ota
 
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
+
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
@@ -89,30 +91,6 @@ text_sensor:
     update_interval: 60s
 
 sensor:
-  - platform: uptime
-    name: uptime_sensor
-    id: uptime_sensor
-    update_interval: 60s
-    internal: true
-    on_raw_value:
-      then:
-        - text_sensor.template.publish:
-            id: uptime_human_readable
-            state: !lambda |-
-                      int seconds = round(id(uptime_sensor).raw_state);
-                      int days = seconds / (24 * 3600);
-                      seconds = seconds % (24 * 3600);
-                      int hours = seconds / 3600;
-                      seconds = seconds % 3600;
-                      int minutes = seconds /  60;
-                      seconds = seconds % 60;
-                      return (
-                        (days ? to_string(days)+":" : "00:") +
-                        (hours ? to_string(hours)+":" : "00:") +
-                        (minutes ? to_string(minutes)+":" : "00:") +
-                        (to_string(seconds))
-                      ).c_str();
-
   - platform: custom # currently crashes ESP32
     lambda: |-
       auto uart_component = static_cast<LD2410 *>(ld2410);
@@ -154,6 +132,33 @@ sensor:
     unit_of_measurement: "cm"
     accuracy_decimals: 0
     internal: true
+
+  - platform: dht
+    pin: GPIO9
+    temperature:
+      name: "kinderkamer-lucas-temperature"
+      filters:
+        - offset: -1.0
+        - sliding_window_moving_average:
+            window_size: 10
+            send_every: 10
+    humidity:
+      name: "kinderkamer-lucas-humidity"
+      filters:
+        - sliding_window_moving_average:
+            window_size: 10
+            send_every: 10
+    update_interval: 60s
+    model: DHT11
+
+  - platform: adc
+    pin: GPIO3
+    name: "kinderkamer-lucas-illuminance"
+    update_interval: '30s'
+    unit_of_measurement: lux
+    filters:
+      - lambda: |-
+          return (x / 10000.0) * 2000000.0;
 
 custom_component:
   - lambda: |-
