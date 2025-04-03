@@ -41,7 +41,7 @@ D7 <-> OUT
 Choose the ESP32 code of your flavour (including or without other sensors)  
 
 ##### Example including ESP32 + LD2410  
-example: esp-motion-toiet-beneden.yaml
+example: esp-motion-toiet.yaml
 ##### Example including ESP32 + LD2410 + Dallas temp sensor + Lux sensor  
 example: esp-motion-slaapkamer.yaml
 ##### Example including ESP32 + LD2410 + DHT11 (temp/hum) + Lux sensor  
