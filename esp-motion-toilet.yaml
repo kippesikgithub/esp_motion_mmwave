@@ -1,6 +1,9 @@
+# ESP32 - LD2410
+# name for Esphome --> CHANGE to your own name!!
 esphome:
   name: esp-motion-toilet-beneden
-    
+
+# ESP32 board used --> CHANGE to your own BOARD used!!
 esp32:
   board: esp32dev
   framework:
@@ -25,17 +28,12 @@ wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
 
-  manual_ip:
-    static_ip: 192.168.111.127
-    gateway: 192.168.111.1
-    subnet: 255.255.255.0
-    dns1: 192.168.111.1
-
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: !secret ap_ssid
     password: !secret ap_password
 
+# prefix for Home Assistant entities --> CHANGE to our yown prefix
 substitutions:
   device_name: toilet_beneden_
 
@@ -47,6 +45,7 @@ web_server:
 
 captive_portal:
 
+# UART for the LD2410 board --> CHANGE to your GPIO!!
 uart:
   id: uart_bus
   tx_pin:
@@ -146,6 +145,7 @@ binary_sensor:
     out_pin_presence_status:
       name: ${device_name}engineering_occupancy
 
+# LD2410 PINOUT GPIO --> CHANGE to your own GPIO!!
   - platform: gpio
     pin: GPIO5
     name: ${device_name}occupancy
