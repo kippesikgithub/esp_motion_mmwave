@@ -80,13 +80,13 @@ button:
       name: ${device_name}query_params
 
 sensor:
-# Dalles temp sensor setup --> Chnage to our own ADDRESS!!
+# Dalles temp sensor setup --> CHANGE to our own ADDRESS!!
   - platform: dallas_temp
     address: 0x0000000000000000
     name: "slaapkamer-temperature"
     update_interval: 30s
 
-# Illiminance GPIO --> Change to your own GPIO!!
+# Illiminance GPIO --> CHANGE to your own GPIO!!
   - platform: adc
     pin: GPIO3
     name: ${device_name}illuminance
@@ -166,6 +166,7 @@ binary_sensor:
     out_pin_presence_status:
       name: ${device_name}engineering_occupancy
 
+# LD2410 PINOUT GPIO --> CHANGE to your own GPIO!!
   - platform: gpio
     pin: GPIO5
     name: ${device_name}occupancy
