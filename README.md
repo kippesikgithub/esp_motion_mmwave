@@ -38,11 +38,11 @@ D7 <-> OUT
 #### Step 3
 Choose the ESP32 code of your flavour (including or without other sensors)  
 
-#### Example including ESP32-S2 + LD2410  
+##### Example including ESP32 + LD2410  
 example: esp-motion-toiet-beneden.yaml
-#### Example including ESP32-S2 + LD2410 + Dallas temp sensor + Lux sensor  
+##### Example including ESP32 + LD2410 + Dallas temp sensor + Lux sensor  
 example: esp-motion-slaapkamer.yaml
-#### Example including ESP32-S2 + LD2410 + DHT11 + Lux sensor  
+##### Example including ESP32 + LD2410 + DHT11 (temp/hum) + Lux sensor  
 example: esp-motion-kinderkamer-sophie.yaml  
 
 Make sure you change all the !secret values, or create them in your esphome secrets  
@@ -56,8 +56,7 @@ Once finsihed and sensor is online, you can add it in Home assistant or visit th
 
 
 #### Web Config
-![image](https://user-images.githubusercontent.com/100353268/213941881-8a898fc7-f863-49ce-811d-e8e2b4ab90b9.png)
-![image](https://user-images.githubusercontent.com/100353268/213941904-7c9577e7-99bc-47e8-b3ce-d7743633914d.png)
+
 
 
 ## other sources used  
