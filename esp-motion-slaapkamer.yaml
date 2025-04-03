@@ -1,0 +1,248 @@
+# ESP32 - LD2410 - Dallas temp - ADC Lux
+# name for Esphome --> CHANGE to your own name!!
+esphome:
+  name: esp-motion-slaapkamer
+
+# ESP32 board used --> CHANGE to your own BOARD used!!
+esp32:
+  board: esp32-s2-saola-1
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+  baud_rate: 0
+  logs:
+    sensor: INFO # DEBUG level with uart_target_output = overload!
+    binary_sensor: INFO
+    text_sensor: INFO
+
+# Enable Home Assistant API
+api:
+
+ota:
+  platform: esphome
+  password: !secret ota
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  manual_ip:
+    static_ip: 192.168.111.150
+    gateway: 192.168.111.1
+    subnet: 255.255.255.0
+    dns1: 192.168.111.1
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: !secret ap_ssid
+    password: !secret ap_password
+
+# onewire protocol needed for dallas temp sensor --> CHANGE to your GPIO!!
+one_wire:
+  - platform: gpio
+    pin: GPIO9
+
+# prefix for Home Assistant entities --> CHANGE to our yown prefix
+substitutions:
+  device_name: slaapkamer_
+
+web_server:
+  port: 80
+  version: 2
+  include_internal: true
+  ota: false
+
+captive_portal:
+
+# UART for the LD2410 board --> CHANGE to your GPIO!!
+uart:
+  id: uart_bus
+  tx_pin:
+    number: GPIO18
+  rx_pin: 
+    number: GPIO33
+  baud_rate: 256000
+  parity: NONE
+  stop_bits: 1
+
+ld2410:
+
+switch:
+  - platform: ld2410
+    engineering_mode:
+      name: ${device_name}engineering_mode
+
+button: 
+  - platform: restart
+    name: ${device_name}restart_device  
+  - platform: ld2410
+    factory_reset:
+      name: ${device_name}ld2410_factory_reset
+    restart:
+      name: ${device_name}ld2410_restart
+    query_params:
+      name: ${device_name}query_params
+
+sensor:
+# Dalles temp sensor setup --> Chnage to our own ADDRESS!!
+  - platform: dallas_temp
+    address: 0x0000000000000000
+    name: "slaapkamer-temperature"
+    update_interval: 30s
+
+# Illiminance GPIO --> Change to your own GPIO!!
+  - platform: adc
+    pin: GPIO3
+    name: ${device_name}illuminance
+    update_interval: '30s'
+    unit_of_measurement: lux
+    filters:
+      - lambda: |-
+          return (x / 10000.0) * 2000000.0;
+
+  - platform: ld2410
+    light:
+      name: ${device_name}light_sensitivity
+    moving_distance:
+      name : ${device_name}moving_distance
+    still_distance:
+      name: ${device_name}still_distance
+    moving_energy:
+      name: ${device_name}moving_energy
+    still_energy:
+      name: ${device_name}still_energy
+    detection_distance:
+      name: ${device_name}detection_distance
+    g0:
+      move_energy:
+        name: ${device_name}g0_move_energy
+      still_energy:
+        name: ${device_name}g0_still_energy
+    g1:
+      move_energy:
+        name: ${device_name}g1_move_energy
+      still_energy:
+        name: ${device_name}g1_still_energy
+    g2:
+      move_energy:
+        name: ${device_name}g2_move_energy
+      still_energy:
+        name: ${device_name}g2_still_energy
+    g3:
+      move_energy:
+        name: ${device_name}g3_move_energy
+      still_energy:
+        name: ${device_name}g3_still_energy
+    g4:
+      move_energy:
+        name: ${device_name}g4_move_energy
+      still_energy:
+        name: ${device_name}g4_still_energy
+    g5:
+      move_energy:
+        name: ${device_name}g5_move_energy
+      still_energy:
+        name: ${device_name}g5_still_energy
+    g6:
+      move_energy:
+        name: ${device_name}g6_move_energy
+      still_energy:
+        name: ${device_name}g6_still_energy
+    g7:
+      move_energy:
+        name: ${device_name}g7_move_energy
+      still_energy:
+        name: ${device_name}g7_still_energy
+    g8:
+      move_energy:
+        name: ${device_name}g8_move_energy
+      still_energy:
+        name: ${device_name}g8_still_energy
+
+binary_sensor:
+  - platform: ld2410
+    has_target:
+      name: ${device_name}presence
+    has_moving_target:
+      name: ${device_name}moving_target
+    has_still_target:
+      name: ${device_name}still_target
+    out_pin_presence_status:
+      name: ${device_name}engineering_occupancy
+
+  - platform: gpio
+    pin: GPIO5
+    name: ${device_name}occupancy
+    device_class: presence
+
+number:
+  - platform: ld2410
+    timeout:
+      name: ${device_name}timeout
+    light_threshold:
+      name: ${device_name}light_threshold
+    max_move_distance_gate:
+      name: ${device_name}max_move_distance_gate
+    max_still_distance_gate:
+      name: ${device_name}max_still_distance_gate
+    g0:
+      move_threshold:
+        name: ${device_name}g0_move_threshold
+      still_threshold:
+        name: ${device_name}g0_still_threshold
+    g1:
+      move_threshold:
+        name: ${device_name}g1_move_threshold
+      still_threshold:
+        name: ${device_name}g1_still_threshold
+    g2:
+      move_threshold:
+        name: ${device_name}g2_move_threshold
+      still_threshold:
+        name: ${device_name}g2_still_threshold
+    g3:
+      move_threshold:
+        name: ${device_name}g3_move_threshold
+      still_threshold:
+        name: ${device_name}g3_still_threshold
+    g4:
+      move_threshold:
+        name: ${device_name}g4_move_threshold
+      still_threshold:
+        name: ${device_name}g4_still_threshold
+    g5:
+      move_threshold:
+        name: ${device_name}g5_move_threshold
+      still_threshold:
+        name: ${device_name}g5_still_threshold
+    g6:
+      move_threshold:
+        name: ${device_name}g6_move_threshold
+      still_threshold:
+        name: ${device_name}g6_still_threshold
+    g7:
+      move_threshold:
+        name: ${device_name}g7_move_threshold
+      still_threshold:
+        name: ${device_name}g7_still_threshold
+    g8:
+      move_threshold:
+        name: ${device_name}g8_move_threshold
+      still_threshold:
+        name: ${device_name}g8_still_threshold
+
+select:
+  - platform: ld2410
+    distance_resolution:
+      name: ${device_name}distance_resolution
+    light_function:
+      name: ${device_name}ld2410_ligh_function
+    out_pin_level:
+      name: ${device_name}ld2410_out_pin_level
+
+text_sensor:
+  - platform: ld2410
+    version:
+      name: ${device_name}firmware_version
