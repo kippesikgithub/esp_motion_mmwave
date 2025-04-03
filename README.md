@@ -6,6 +6,7 @@ sensor: https://nl.aliexpress.com/item/1005004786874722.html?spm=a2g0o.order_lis
   
 ### Step 1
 Collect your Boards, sensors and code.  
+The code uses the native LD2410 Esphome integration now, and does not need any additional files anymore.
 
 ### Step 2
 Connect the hardware and get an usb cable for uploading firmware to your ESP32.  
