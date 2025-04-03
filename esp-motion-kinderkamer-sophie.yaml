@@ -1,6 +1,9 @@
+# ESP32 - LD2410 - DHT11 temp/humidity - ADC Lux
+# name for Esphome --> CHANGE to your own name!!
 esphome:
   name: esp-motion-kinderkamer-sophie
 
+# ESP32 board used --> CHANGE to your own BOARD used!!
 esp32:
   board: esp32-s2-saola-1
   framework:
@@ -30,6 +33,7 @@ wifi:
     ssid: !secret ap_ssid
     password: !secret ap_password
 
+# prefix for Home Assistant entities --> CHANGE to our yown prefix
 substitutions:
   device_name: kinderkamer_sophie_
 
@@ -41,6 +45,7 @@ web_server:
 
 captive_portal:
 
+# UART for the LD2410 board --> CHANGE to your GPIO!!
 uart:
   id: uart_bus
   tx_pin:
@@ -70,6 +75,7 @@ button:
       name: ${device_name}query_params
 
 sensor:
+# DHT11 GPIO --> CHANGE to your own GPIO!!
   - platform: dht
     pin: GPIO9
     temperature:
@@ -88,6 +94,7 @@ sensor:
     update_interval: 60s
     model: DHT11
 
+# Illuminance GPIO --> CHANGE to your own GPIO!!
   - platform: adc
     pin: GPIO3
     name: ${device_name}illuminance
@@ -167,6 +174,7 @@ binary_sensor:
     out_pin_presence_status:
       name: ${device_name}engineering_occupancy
 
+# LD2410 PINOUT GPIO --> CHANGE to your own GPIO!!
   - platform: gpio
     pin: GPIO5
     name: ${device_name}occupancy
