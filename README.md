@@ -8,7 +8,8 @@ sensor: https://nl.aliexpress.com/item/1005004786874722.html?spm=a2g0o.order_lis
 
 
 ### Step 2
-Choose the ESP32 or ESP8266 code for your board  
+Choose the ESP32 code of your flavour (including or without other sensors)  
+
 ![image](https://user-images.githubusercontent.com/100353268/213939599-cc16b760-055d-4786-9fc2-663132c9dd59.png)
 
 #### Pinout ESP32 (ESP32-S2)
